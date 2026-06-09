@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Face Recognition Based Attendance System</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #1a1a2e; color: white; text-align: center; }
+        h1 { color: #e0e0e0; padding: 20px; }
+        .container { display: flex; justify-content: space-around; padding: 20px; }
+        .card { background: #16213e; padding: 20px; border-radius: 10px; width: 45%; }
+        h2 { color: #0f3460; background: #e0e0e0; padding: 10px; border-radius: 5px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { padding: 8px; border: 1px solid #444; }
+        th { background: #0f3460; }
+        input { display: block; width: 90%; margin: 10px auto; padding: 8px; border-radius: 5px; border: none; }
+        button { background: #0f3460; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin: 5px; }
+        button:hover { background: #e94560; }
+        .mess { color: #e94560; }
+        .total { margin-top: 10px; color: #aaa; }
+    </style>
+</head>
+<body>
+    <h1>Face Recognition Based Attendance System</h1>
+    {% if mess %}<p class="mess">{{ mess }}</p>{% endif %}
+    <div class="container">
+        <div class="card">
+            <h2>Today's Attendance 📋</h2>
+            <a href="/start"><button>Take Attendance ✅</button></a>
+            <table>
+                <tr><th>S No</th><th>Name</th><th>ID</th><th>Time</th></tr>
+                {% for i in range(l) %}
+                <tr>
+                    <td>{{ i+1 }}</td>
+                    <td>{{ names[i] }}</td>
+                    <td>{{ rolls[i] }}</td>
+                    <td>{{ times[i] }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="card">
+            <h2>Add New User ©</h2>
+            <form action="/add" method="POST">
+                <input type="text" name="newusername" placeholder="Enter New User Name*" required>
+                <input type="text" name="newuserid" placeholder="Enter New User Id*" required>
+                <button type="submit">Add New User</button>
+            </form>
+            <p class="total">Total Users in Database: {{ totalreg }}</p>
+        </div>
+    </div>
+</body>
+</html>
